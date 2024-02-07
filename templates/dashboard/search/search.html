@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Books</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            flex: 1;
+            width: 500px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        button[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            width: 100px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            
+        }
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 10px 0;
+            border-bottom: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Search Books</h1>
+        <form method="GET">
+            {{ form.as_p }}
+            <button type="submit">Search</button>
+        </form>
+        {% if filtered_books %}
+        <ul>
+            {% for book in filtered_books %}
+                <li>{{ book.title }}</li>
+                <!-- Add more book details as needed -->
+            {% endfor %}
+        </ul>
+    {% else %}
+        {% if form.is_bound %}
+        <p>No books found.</p>
+        {% endif %}  
+    {% endif %}
+
+    </div>
+</body>
+</html>

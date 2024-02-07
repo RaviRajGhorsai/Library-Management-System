@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header class="bg-dark text-white p-3">
+        <div class="container">
+            <div class="d-flex align-items-center">
+                <h1 class="me-auto">Librarian</h1>
+                <nav class="nav">
+                     <a class="nav-link" href="/dashboard/search/">Search for books</a> 
+                    <a class="nav-link" href="/dashboard/borrow/">Borrow/Return books</a>
+                    <a class="nav-link" href="/dashboard/borrow/viewBooks/">View borrowed books</a>
+                    <a class="nav-link" href="account.html">Account settings</a>
+                    <a class="nav-link text-danger" href="/logout/">Logout</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <script>
+        // Get the logged-in username from a source (e.g. localStorage)
+var username = "{{ request.user.username }}";
+
+function showAlert() {
+  var alertBox = document.createElement("div");
+  alertBox.setAttribute("id", "alertBox");
+  alertBox.className = "alert alert-success";
+  alertBox.role = "alert";
+  alertBox.innerHTML = "Welcome, " + username + "!<br>You have successfully logged in.";
+  document.body.appendChild(alertBox);
+
+  setTimeout(function() {
+    document.body.removeChild(alertBox);
+  }, 3000); // 3000 milliseconds = 3 seconds
+}
+
+showAlert();
+    </script>
+
+    {% block content %}
+
+    <main class="container">
+       <!--<section class="p-3 border-bottom">
+            <h2 class="text-primary">Welcome, John Doe!</h2>
+            <p>You have successfully logged in.</p>
+        </section> --> 
+       <!--  <section class="p-3">
+            <h2 class="text-primary">Search for books</h2>
+            <form class="mb-3">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search by title, author, genre...">
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </div>
+            </form>
+        -->
+
+            <div class="container-fluid mt-3 ">
+                <div class="header d-flex justify-content-between">
+                    <h4>Available Books</h4>
+                    <input type="text" class="" id="filter-books" placeholder="search..." oninput="filterBooks()"  />
+                </div>
+                <div class="row mt-2" id="book-container">
+                    {% for book in books %}
+                    <div class="col-lg-3 m-1 card p-4">
+                        <h6>{{book.title}}</h6>
+                        <span>{{book.author}}</span>
+                        <span>Available in library : {% if book.quantity_available == 0 %} <span class="text-danger">Out of copies</span>{% elif book.quantity_available <= 10 %}  <span class="text-danger">{{book.quantity_available}} </span>{% else %} {{book.quantity_available}} {% endif %} </span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <script>
+                function filterBooks() {
+                    var input, filter, cards, card, title, author, i;
+                    input = document.getElementById("filter-books");
+                    console.log(input)
+            
+                    filter = input.value.toUpperCase();
+                    cards = document.getElementById("book-container").getElementsByClassName("card");
+                    for (i = 0; i < cards.length; i++) {
+                        title = cards[i].getElementsByTagName("h6")[0];
+                        author = cards[i].getElementsByTagName("span")[0];
+                        if (title.innerHTML.toUpperCase().indexOf(filter) > -1 || author.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                            cards[i].style.display = "";
+                        } else {
+                            cards[i].style.display = "none";
+                        }
+                    }
+                }
+            </script>
+
+    {% endblock %}
+
+    <!--
+            <h2 class="text-primary">Borrowed books</h2>
+            <ul class="list-unstyled">
+                <li>Book 1</li>
+                <li>Book 2</li>
+                <li>Book 3</li>
+            </ul>
+            <div class="d-flex justify-content-between">
+                <button class="btn btn-primary">Renew</button>
+                <button class="btn btn-danger">Return</button>
+            </div>
+        </section>
+        <section class="p-3">
+            <h2 class="text-primary">Announcements</h2>
+            <ul class="list-unstyled">
+                <li>New book arrival: Book 4</li>
+                <li>Upcoming event: Storytime</li>
+            </ul>
+        </section>
+        <section class="p-3">
+            <h2 class="text-primary">Profile Information</h2>
+            <ul class="list-unstyled">
+                <li><strong>Name:</strong> John Doe</li>
+                <li><strong>Contact:</strong> john.doe@example.com</li>
+                <li><strong>Membership status:</strong> Active</li>
+            </ul>
+        </section>
+    </main>
+    <footer class="bg-dark text-white p-3">
+        <div class="container">
+            <p>&copy; 2022 Library Management System. All rights reserved.</p>
+            <ul class="list-unstyled d-flex justify-content-center">
+                <li class="me-3">
+                    <a class="text-white" href="terms.html">Terms of Service</a>
+                </li>
+                <li class="me-3">
+                    <a class="text-white" href="privacy.html">Privacy Policy</a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+
+    -->

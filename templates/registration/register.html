@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration</title>
+    <style>
+        body {
+            background-color: white;
+            font-family: Arial, sans-serif;
+        }
+        
+        .container {
+            width: 300px;
+            padding: 13px;
+            background-color: white;
+            margin: 0 auto;
+            margin-top: 25px;
+            margin-bottom: 30px;
+            border: 1px solid black;
+            border-radius: 4px;
+        }
+        
+        .container h1 {
+            text-align: center;
+        }
+        
+        .container label {
+            display: block;
+            margin-top: 10px;
+        }
+        
+        .container input[type="text"], .container input[type="email"], .container input[type="password"], .container input[type="number"] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 5px 0;
+            box-sizing: border-box;
+        }
+        
+        .container .button {
+            background-color: #007BFF;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+        
+        .container .button:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Register</h1>
+        <form method="POST" action="{% url 'register' %}">
+            {% csrf_token %}
+            <label for="fname">First Name:</label><br>
+            <input type="text" id="fname" name="first_name" required><br>
+            <label for="lname">Last Name:</label><br>
+            <input type="text" id="lname" name="last_name" required><br>
+            <label for="contact">Contact:</label><br>
+            <input type="number" id="contact" name="contact" required><br>
+            <label for="address">Address:</label><br>
+            <input type="text" id="address" name="address" required><br>
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email" required><br>
+            <label for="pwd">Password:</label><br>
+            <input type="password" id="pwd" name="password" required><br>
+            <label for="cpwd">Confirm Password:</label><br>
+            <input type="password" id="cpwd" name="password_confirm" required><br>
+            <input type="submit" value="Register" class="button">
+        </form>
+    </div>
+</body>
+</html>

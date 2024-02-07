@@ -1,0 +1,44 @@
+body {
+	background-color: white;
+	font-family: Arial, sans-serif;
+}
+
+.container {
+	width: 300px;
+	padding: 16px;
+	background-color: white;
+	margin: 0 auto;
+	margin-top: 40px;
+	border: 1px solid black;
+	border-radius: 4px;
+}
+
+.container h1 {
+	text-align: center;
+}
+
+.container label {
+	display: block;
+	margin-top: 10px;
+}
+
+.container input[type="text"], .container input[type="email"], .container input[type="password"] {
+	width: 100%;
+	padding: 12px 20px;
+	margin: 5px 0;
+	box-sizing: border-box;
+}
+
+.container .button {
+	background-color: #007BFF;
+	color: white;
+	padding: 14px 20px;
+	margin: 8px 0;
+	border: none;
+	cursor: pointer;
+	width: 100%;
+}
+
+.container .button:hover {
+	opacity: 0.8;
+}
